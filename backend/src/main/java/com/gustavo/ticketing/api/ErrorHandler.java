@@ -29,6 +29,15 @@ public class ErrorHandler {
     return pd;
   }
 
+  @ExceptionHandler(IllegalArgumentException.class)
+  public ProblemDetail handleIllegalArg(IllegalArgumentException ex) {
+    var pd = ProblemDetail.forStatus(HttpStatus.UNAUTHORIZED);
+    pd.setTitle("Unauthorized");
+    pd.setDetail(ex.getMessage());
+    pd.setProperty("timestamp", Instant.now().toString());
+    return pd;
+  }
+
   @ExceptionHandler(DataIntegrityViolationException.class)
   public ProblemDetail handleConstraint(DataIntegrityViolationException ex) {
     var pd = ProblemDetail.forStatus(HttpStatus.CONFLICT);

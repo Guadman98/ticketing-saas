@@ -4,7 +4,8 @@ import com.gustavo.ticketing.application.ticket.TicketFilters;
 import org.springframework.data.jpa.domain.Specification;
 
 public final class TicketSpecifications {
-  private TicketSpecifications() {}
+  private TicketSpecifications() {
+  }
 
   public static Specification<TicketJpaEntity> byOrgAndFilters(java.util.UUID orgId, TicketFilters f) {
     return (root, query, cb) -> {
@@ -22,12 +23,14 @@ public final class TicketSpecifications {
         if (f.assignedTo() != null) {
           p = cb.and(p, cb.equal(root.get("assignedTo"), f.assignedTo()));
         }
+        if (f.createdBy() != null) {
+          p = cb.and(p, cb.equal(root.get("createdBy"), f.createdBy()));
+        }
         if (f.q() != null && !f.q().isBlank()) {
           var like = "%" + f.q().toLowerCase() + "%";
           p = cb.and(p, cb.or(
               cb.like(cb.lower(root.get("title")), like),
-              cb.like(cb.lower(root.get("description")), like)
-          ));
+              cb.like(cb.lower(root.get("description")), like)));
         }
       }
 
