@@ -7,7 +7,6 @@ import com.gustavo.ticketing.application.ticket.ListTicketsUseCase;
 import com.gustavo.ticketing.application.ticket.TicketFilters;
 import com.gustavo.ticketing.domain.ticket.TicketPriority;
 import com.gustavo.ticketing.domain.ticket.TicketStatus;
-import com.gustavo.ticketing.infrastructure.config.BootstrapProperties;
 import com.gustavo.ticketing.domain.auth.AuthPrincipal;
 import org.springframework.security.core.Authentication;
 import jakarta.validation.Valid;

@@ -4,7 +4,6 @@ import com.gustavo.ticketing.api.ticketcomment.dto.CreateCommentRequest;
 import com.gustavo.ticketing.api.ticketcomment.dto.TicketCommentResponse;
 import com.gustavo.ticketing.application.ticketcomment.CreateCommentUseCase;
 import com.gustavo.ticketing.application.ticketcomment.ListCommentsUseCase;
-import com.gustavo.ticketing.infrastructure.config.BootstrapProperties;
 import com.gustavo.ticketing.domain.auth.AuthPrincipal;
 import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
