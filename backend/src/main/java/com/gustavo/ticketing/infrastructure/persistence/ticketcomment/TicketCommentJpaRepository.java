@@ -8,4 +8,7 @@ import java.util.UUID;
 
 public interface TicketCommentJpaRepository extends JpaRepository<TicketCommentJpaEntity, UUID> {
   Page<TicketCommentJpaEntity> findByOrgIdAndTicketIdOrderByCreatedAtAsc(UUID orgId, UUID ticketId, Pageable pageable);
+
+  Page<TicketCommentJpaEntity> findByOrgIdAndTicketIdAndVisibilityOrderByCreatedAtAsc(
+      UUID orgId, UUID ticketId, String visibility, Pageable pageable);
 }

@@ -3,7 +3,7 @@ package com.gustavo.ticketing.api.ticketcomment;
 import com.gustavo.ticketing.api.ticketcomment.dto.CreateCommentRequest;
 import com.gustavo.ticketing.api.ticketcomment.dto.TicketCommentResponse;
 import com.gustavo.ticketing.application.ticketcomment.CreateCommentUseCase;
-import com.gustavo.ticketing.application.ticketcomment.ListCommentsUseCase;
+import com.gustavo.ticketing.application.ticketcomment.ListCommentsForUserUseCase;
 import com.gustavo.ticketing.domain.auth.AuthPrincipal;
 import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
@@ -18,11 +18,11 @@ import java.util.UUID;
 public class TicketCommentController {
 
   private final CreateCommentUseCase create;
-  private final ListCommentsUseCase list;
+  private final ListCommentsForUserUseCase listForUser;
 
-  public TicketCommentController(CreateCommentUseCase create, ListCommentsUseCase list) {
+  public TicketCommentController(CreateCommentUseCase create, ListCommentsForUserUseCase listForUser) {
     this.create = create;
-    this.list = list;
+    this.listForUser = listForUser;
   }
 
   @PostMapping
@@ -42,8 +42,9 @@ public class TicketCommentController {
   }
 
   @GetMapping
-  public Page<TicketCommentResponse> list(@PathVariable UUID ticketId, Pageable pageable, Authentication auth) {
-    var p = (AuthPrincipal) auth.getPrincipal();
-    return list.execute(p.orgId(), ticketId, pageable).map(TicketCommentResponse::from);
-  }
+public Page<TicketCommentResponse> list(@PathVariable UUID ticketId, Pageable pageable, Authentication auth) {
+  var p = (AuthPrincipal) auth.getPrincipal();
+  return listForUser.execute(p.orgId(), ticketId, p.role(), pageable)
+      .map(TicketCommentResponse::from);
+}
 }

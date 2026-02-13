@@ -28,4 +28,11 @@ public class TicketCommentRepositoryAdapter implements TicketCommentRepository {
     return jpa.findByOrgIdAndTicketIdOrderByCreatedAtAsc(orgId, ticketId, pageable)
         .map(TicketCommentMapper::toDomain);
   }
+
+  @Override
+public Page<TicketComment> findPublicByTicket(UUID orgId, UUID ticketId, Pageable pageable) {
+  return jpa.findByOrgIdAndTicketIdAndVisibilityOrderByCreatedAtAsc(orgId, ticketId, "PUBLIC", pageable)
+      .map(TicketCommentMapper::toDomain);
+}
+
 }
