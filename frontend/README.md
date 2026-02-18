@@ -7,10 +7,11 @@ Proyecto base Angular (standalone) preparado para conectarse al backend de Ticke
 - Por defecto: `http://localhost:8080/api/v1`.
 
 ## Flujo implementado
-- Pantalla inicial con formulario de login.
-- Llamada a `POST /api/v1/auth/login`.
+- Pantalla de login con llamada a `POST /api/v1/auth/login`.
 - Guardado de `accessToken` en `localStorage`.
-- Interceptor HTTP para enviar `Authorization: Bearer <token>` en llamadas futuras.
+- Interceptor HTTP para enviar `Authorization: Bearer <token>` automáticamente.
+- Formulario para creación de tickets con `POST /api/v1/tickets`.
+- Listado básico de tickets (`GET /api/v1/tickets`) para validar la creación.
 
 ## Comandos
 ```bash
