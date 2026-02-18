@@ -7,3 +7,7 @@ target/
 .project
 .settings/
 .classpath
+
+frontend/node_modules/
+frontend/dist/
+frontent/.angular/
