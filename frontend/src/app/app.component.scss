@@ -1,0 +1,94 @@
+.container {
+  max-width: 900px;
+  margin: 32px auto;
+  padding: 0 16px 32px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.card {
+  margin-top: 16px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+input,
+select,
+textarea {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 10px;
+  font: inherit;
+  background: #fff;
+}
+
+button {
+  width: fit-content;
+  height: 36px;
+  border: 0;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #fff;
+  padding: 0 12px;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: #374151;
+}
+
+.tickets-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.tickets-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tickets-list li {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px;
+  background: #f9fafb;
+}
+
+.tickets-list p {
+  margin: 4px 0;
+}
+
+.success {
+  color: #166534;
+  margin-top: 12px;
+}
+
+.error {
+  color: #b91c1c;
+  margin-top: 12px;
+}

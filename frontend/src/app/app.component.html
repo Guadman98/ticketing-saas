@@ -1,0 +1,78 @@
+<main class="container">
+  <header class="header">
+    <h1>Ticketing SaaS Frontend</h1>
+    <button *ngIf="isAuthenticated" type="button" class="secondary" (click)="logout()">Cerrar sesión</button>
+  </header>
+
+  <section class="card">
+    <h2>1) Iniciar sesión</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="stack">
+      <label>
+        Email
+        <input type="email" formControlName="email" />
+      </label>
+
+      <label>
+        Password
+        <input type="password" formControlName="password" />
+      </label>
+
+      <button type="submit">Iniciar sesión</button>
+    </form>
+  </section>
+
+  <section class="card" *ngIf="isAuthenticated">
+    <h2>2) Crear ticket</h2>
+    <form [formGroup]="ticketForm" (ngSubmit)="createTicket()" class="stack">
+      <label>
+        Título
+        <input type="text" formControlName="title" placeholder="Ej: No puedo acceder al panel" />
+      </label>
+
+      <label>
+        Descripción
+        <textarea formControlName="description" rows="4" placeholder="Describe el problema..."></textarea>
+      </label>
+
+      <label>
+        Prioridad
+        <select formControlName="priority">
+          <option *ngFor="let priority of priorities" [value]="priority">{{ priority }}</option>
+        </select>
+      </label>
+
+      <label>
+        Tags (opcional)
+        <input type="text" formControlName="tags" placeholder="login,error500" />
+      </label>
+
+      <button type="submit">Crear ticket</button>
+    </form>
+  </section>
+
+  <section class="card" *ngIf="isAuthenticated">
+    <div class="tickets-header">
+      <h2>3) Últimos tickets</h2>
+      <button type="button" class="secondary" (click)="loadTickets()">Refrescar</button>
+    </div>
+
+    <p *ngIf="loadingTickets">Cargando tickets...</p>
+
+    <ul *ngIf="!loadingTickets && tickets.length > 0" class="tickets-list">
+      <li *ngFor="let ticket of tickets">
+        <div>
+          <strong>{{ ticket.title }}</strong>
+          <p>ID: {{ ticket.id }}</p>
+          <p>Estado: {{ ticket.status }} · Prioridad: {{ ticket.priority }}</p>
+          <p>Actualizado: {{ ticket.updatedAt | date:'medium' }}</p>
+        </div>
+      </li>
+    </ul>
+
+    <p *ngIf="!loadingTickets && tickets.length === 0">Aún no hay tickets para mostrar.</p>
+  </section>
+
+  <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
+  <p *ngIf="loginError" class="error">{{ loginError }}</p>
+  <p *ngIf="ticketError" class="error">{{ ticketError }}</p>
+</main>

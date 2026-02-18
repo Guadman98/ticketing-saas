@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -43,6 +44,9 @@ class TicketFlowIT {
 
         @Autowired
         TestRestTemplate http;
+
+        @Autowired
+        JdbcTemplate jdbc;
 
         @Test
         void createTicket_thenCreateComment_thenListBoth() {
@@ -115,5 +119,9 @@ class TicketFlowIT {
                 assertThat(listCommentsResp.getStatusCode()).isEqualTo(HttpStatus.OK);
                 assertThat(listCommentsResp.getBody()).isNotNull();
                 assertThat(listCommentsResp.getBody()).containsKey("content");
+
+                Integer auditCount = jdbc.queryForObject("SELECT count(*) FROM audit_events", Integer.class);
+                assertThat(auditCount).isNotNull();
+                assertThat(auditCount).isGreaterThanOrEqualTo(3);
         }
 }

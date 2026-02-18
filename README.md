@@ -31,3 +31,11 @@ docker compose -f infra/docker-compose.yml up -d
 
 ### Run backend
 DB_URL=jdbc:postgresql://<YOUR_HOST_IP>:5432/ticketing DB_USER=ticketing DB_PASS=ticketing mvn -f backend/pom.xml spring-boot:run
+
+
+### Run frontend
+cd frontend
+npm install
+npm start
+
+Frontend runs on Angular and is preconfigured to call backend API at `http://localhost:8080/api/v1`.
