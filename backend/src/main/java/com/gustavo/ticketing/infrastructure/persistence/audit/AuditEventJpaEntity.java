@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import org.hibernate.annotations.ColumnTransformer;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -33,6 +34,7 @@ public class AuditEventJpaEntity {
   private String action;
 
   @Column(name = "metadata_json", columnDefinition = "jsonb")
+  @ColumnTransformer(write = "?::jsonb")
   private String metadataJson;
 
   @Column(name = "created_at", nullable = false)
