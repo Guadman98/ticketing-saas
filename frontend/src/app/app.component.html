@@ -1,0 +1,25 @@
+<main class="container">
+  <h1>Ticketing SaaS Frontend</h1>
+  <p>Este frontend base ya está preparado para conectarse al backend Spring Boot.</p>
+
+  <form [formGroup]="form" (ngSubmit)="login()" class="card">
+    <label>
+      Email
+      <input type="email" formControlName="email" />
+    </label>
+
+    <label>
+      Password
+      <input type="password" formControlName="password" />
+    </label>
+
+    <button type="submit">Iniciar sesión</button>
+  </form>
+
+  <section *ngIf="token" class="card success">
+    <h2>Token recibido</h2>
+    <pre>{{ token }}</pre>
+  </section>
+
+  <p *ngIf="error" class="error">{{ error }}</p>
+</main>
